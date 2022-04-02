@@ -9,8 +9,11 @@ public class Shortcut {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false, unique = true)
     private String code;
+    @Column(nullable = false, unique = true)
     private String url;
+    @Version
     private long counter;
 
     public Shortcut() {
@@ -58,8 +61,12 @@ public class Shortcut {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Shortcut shortcut = (Shortcut) o;
         return id == shortcut.id;
     }
@@ -67,5 +74,15 @@ public class Shortcut {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Shortcut{"
+                + "id=" + id
+                + ", code='" + code + '\''
+                + ", url='" + url + '\''
+                + ", counter=" + counter
+                + '}';
     }
 }
