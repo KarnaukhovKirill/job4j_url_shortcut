@@ -15,11 +15,10 @@ public class ShortcutService {
     public Shortcut findByCode(String code) {
         Shortcut shortcut = shortcutRepository.findShortcutByCode(code);
         if (shortcut != null) {
-            shortcut.setCounter(shortcut.getCounter() + 1L);
-            shortcutRepository.save(shortcut);
+            shortcutRepository.updateCounter(shortcut.getId());
         } else {
-        throw new IllegalArgumentException("Url с таким кодом не существует. "
-                + "Попробуйте зарегистрировать url с помощью /convert.");
+            throw new IllegalArgumentException("Url с таким кодом не существует. "
+                    + "Попробуйте зарегистрировать url с помощью /convert.");
         }
         return shortcut;
     }
